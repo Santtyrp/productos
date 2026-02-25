@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cargar productos - Lista</title>
+  <style>
+    :root{
+      --bg:#f4f6f9;
+      --text:#1b1f2a;
+      --muted:#6b7280;
+      --line:#d9dde6;
+      --primary:#0f1e4a;
+      --danger:#c1121f;
+      --overlay: rgba(15, 30, 74, 0.35);
+    }
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      padding:18px;
+    }
+    .topbar{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:flex-end;
+      justify-content:space-between;
+      margin-bottom:14px;
+    }
+    h1{ margin:0; font-size:20px; color:var(--primary); }
+    .ratebox{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      text-align:right;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .ratebox b{ color:var(--text); }
+    .manual{ display:flex; gap:6px; align-items:center; }
+    input[type="number"], input[type="text"]{
+      height:34px;
+      border:1px solid var(--line);
+      border-radius:6px;
+      padding:0 10px;
+      outline:none;
+      background:white;
+      color:var(--text);
+    }
+    input[type="number"]{ width:140px; }
+    .btn{
+      height:34px;
+      border:1px solid var(--primary);
+      background:var(--primary);
+      color:#fff;
+      border-radius:8px;
+      padding:0 12px;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn-ghost{ background:#fff; color:var(--primary); }
+    .btn-danger{ border-color:var(--danger); background:var(--danger); }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      background:white;
+      border:1px solid var(--line);
+    }
+    thead th{
+      text-align:left;
+      font-size:13px;
+      padding:10px;
+      background:#fafbfc;
+      border-bottom:1px solid var(--line);
+      color:#111827;
+      position:sticky;
+      top:0;
+      z-index:1;
+    }
+    tbody td{
+      padding:9px 10px;
+      border-bottom:1px solid var(--line);
+      font-size:14px;
+      vertical-align:middle;
+    }
+    tbody tr:hover{ background:#f9fbff; }
+    .td-actions{
+      white-space:nowrap;
+      display:flex;
+      gap:8px;
+      justify-content:flex-end;
+    }
+    .mini{
+      height:30px;
+      padding:0 10px;
+      border-radius:7px;
+      font-weight:700;
+      border:1px solid var(--line);
+      background:white;
+      cursor:pointer;
+    }
+    .mini.edit{ border-color:#9ca3af; }
+    .mini.del{ border-color:var(--danger); color:var(--danger); }
+
+    .footer{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .left-actions{
+      display:flex; gap:8px; flex-wrap:wrap; align-items:center;
+      margin-bottom:12px;
+    }
+    .pill{
+      display:inline-flex;
+      gap:6px;
+      align-items:center;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:6px 10px;
+      background:#fff;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .err{ color:var(--danger); font-weight:700; }
+
+    /* ===== Modal ===== */
+    .modalOverlay{
+      position:fixed;
+      inset:0;
+      background:var(--overlay);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      z-index:999;
+    }
+    .modal{
+      width:min(520px, 100%);
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:14px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
+      overflow:hidden;
+    }
+    .modalHeader{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 16px;
+      background:#fafbfc;
+      border-bottom:1px solid var(--line);
+    }
+    .modalHeader h2{
+      margin:0;
+      font-size:16px;
+      color:var(--primary);
+    }
+    .closeX{
+      border:1px solid var(--line);
+      background:#fff;
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:900;
+      color:#111827;
+    }
+    .modalBody{ padding:14px 16px; }
+    .field{ margin-bottom:12px; }
+    .field label{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+      font-weight:700;
+    }
+    .field input{
+      width:100%;
+      height:40px;
+      border-radius:10px;
+    }
+    .help{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:6px;
+      line-height: 1.35;
+    }
+    .modalFooter{
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      padding:14px 16px;
+      border-top:1px solid var(--line);
+      background:#fff;
+    }
+    .btnWide{ height:40px; border-radius:10px; }
+
+    .estimateBox{
+      margin-top:10px;
+      border:1px dashed var(--line);
+      border-radius:12px;
+      padding:10px 12px;
+      background:#fcfdff;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .estimateBox b{ color:var(--text); }
+    .estimateBox .muted{ color:var(--muted); font-size:12px; }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div>
+      <h1>Productos (lista)</h1>
+      <div style="color:var(--muted); font-size:13px; margin-top:6px;">
+        Cargás en USD y se convierte automático a ARS con el dólar oficial del día.
+      </div>
+    </div>
+
+    <div class="ratebox">
+      <span class="pill">Fuente: <b id="rateSource">Cargando…</b></span>
+      <span class="pill">Dólar venta: <b id="rateValue">—</b></span>
+      <span class="pill">Actualizado: <b id="rateUpdated">—</b></span>
+
+      <div class="manual">
+        <input id="manualRate" type="number" min="0" step="0.01" placeholder="Dólar manual" />
+        <button class="btn btn-ghost" id="applyManual">Usar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="left-actions">
+    <button class="btn" id="addBtn">+ Agregar producto</button>
+    <button class="btn btn-ghost" id="exportCsv">Exportar CSV</button>
+    <button class="btn btn-danger" id="clearAll">Borrar todo</button>
+    <span id="status" class="pill">Listo</span>
+  </div>
+
+  <table aria-label="Lista de productos">
+    <thead>
+      <tr>
+        <th style="width:45%;">Producto</th>
+        <th style="width:15%;">USD</th>
+        <th style="width:20%;">ARS</th>
+        <th style="width:20%; text-align:right;">Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+
+  <div class="footer">
+    <div>Se guarda en tu navegador (localStorage). Si abrís en otra PC/navegador, no se copia solo.</div>
+    <div id="countInfo">0 productos</div>
+  </div>
+
+  <!-- ===== Modal Agregar/Editar ===== -->
+  <div class="modalOverlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modalHeader">
+        <h2 id="modalTitle">Agregar producto</h2>
+        <button class="closeX" id="closeModal" title="Cerrar">✕</button>
+      </div>
+      <div class="modalBody">
+        <div class="field">
+          <label for="pName">Nombre del producto</label>
+          <input id="pName" type="text" placeholder="Ej: Pala de pádel" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label for="pUsd">Precio (USD)</label>
+          <input id="pUsd" type="number" min="0" step="0.01" placeholder="Ej: 25.50" />
+          <div class="help">Se convierte a ARS automáticamente con el dólar oficial (venta).</div>
+
+          <div class="estimateBox">
+            <div>
+              <div class="muted">ARS estimado</div>
+              <b id="arsEstimate">—</b>
+            </div>
+            <div class="muted" id="rateHint">Usando dólar: —</div>
+          </div>
+        </div>
+
+        <div id="modalError" class="help" style="display:none; color:var(--danger); font-weight:700;"></div>
+      </div>
+      <div class="modalFooter">
+        <button class="btn btn-ghost btnWide" id="cancelModal">Cancelar</button>
+        <button class="btn btnWide" id="saveModal">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const STORAGE_KEY = "lista_productos_v1";
+  const DOLAR_API_URL = "https://dolarapi.com/v1/dolares/oficial";
+
+  let products = loadProducts();
+  let usdRate = null; // ARS por 1 USD (venta)
+  let rateMeta = { source: "—", updated: "—" };
+
+  let modalMode = "add"; // "add" | "edit"
+  let editingId = null;
+
+  const nfARS = new Intl.NumberFormat("es-AR", { style:"currency", currency:"ARS", maximumFractionDigits: 2 });
+  const nfUSD = new Intl.NumberFormat("en-US", { style:"currency", currency:"USD", maximumFractionDigits: 2 });
+
+  function setStatus(msg, isError=false){
+    const el = document.getElementById("status");
+    el.textContent = msg;
+    el.classList.toggle("err", !!isError);
+  }
+
+  function loadProducts(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    }catch(e){ return []; }
+  }
+
+  function saveProducts(){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+  }
+
+  function uid(){
+    return Math.random().toString(16).slice(2) + Date.now().toString(16);
+  }
+
+  function toNumber(v){
+    const n = Number(v);
+    return Number.isFinite(n) ? n : null;
+  }
+
+  function formatRate(v){
+    if(!v) return "—";
+    return nfARS.format(v).replace("ARS", "").trim() + " / USD";
+  }
+
+  function computeARS(usd){
+    if(!usdRate || !Number.isFinite(usd)) return null;
+    return usd * usdRate;
+  }
+
+  function render(){
+    const tbody = document.getElementById("tbody");
+    tbody.innerHTML = "";
+
+    products.forEach(p => {
+      const tr = document.createElement("tr");
+
+      const tdName = document.createElement("td");
+      tdName.textContent = p.name;
+
+      const tdUsd = document.createElement("td");
+      tdUsd.textContent = nfUSD.format(p.usd);
+
+      const tdArs = document.createElement("td");
+      const ars = computeARS(p.usd);
+      tdArs.textContent = (ars == null) ? "—" : nfARS.format(ars);
+
+      const tdActions = document.createElement("td");
+      tdActions.className = "td-actions";
+
+      const btnEdit = document.createElement("button");
+      btnEdit.className = "mini edit";
+      btnEdit.textContent = "Editar";
+      btnEdit.onclick = () => openModalEdit(p.id);
+
+      const btnDel = document.createElement("button");
+      btnDel.className = "mini del";
+      btnDel.textContent = "Eliminar";
+      btnDel.onclick = () => deleteProduct(p.id);
+
+      tdActions.appendChild(btnEdit);
+      tdActions.appendChild(btnDel);
+
+      tr.appendChild(tdName);
+      tr.appendChild(tdUsd);
+      tr.appendChild(tdArs);
+      tr.appendChild(tdActions);
+
+      tbody.appendChild(tr);
+    });
+
+    document.getElementById("countInfo").textContent =
+      `${products.length} producto${products.length === 1 ? "" : "s"}`;
+
+    document.getElementById("rateSource").textContent = rateMeta.source;
+    document.getElementById("rateValue").textContent = usdRate ? formatRate(usdRate) : "—";
+    document.getElementById("rateUpdated").textContent = rateMeta.updated || "—";
+  }
+
+  // ===== Modal =====
+  function showModal(){
+    const ov = document.getElementById("modalOverlay");
+    ov.style.display = "flex";
+    ov.setAttribute("aria-hidden", "false");
+    updateEstimate();
+    setTimeout(() => document.getElementById("pName").focus(), 0);
+  }
+
+  function hideModal(){
+    const ov = document.getElementById("modalOverlay");
+    ov.style.display = "none";
+    ov.setAttribute("aria-hidden", "true");
+    clearModalError();
+  }
+
+  function setModalError(msg){
+    const el = document.getElementById("modalError");
+    el.style.display = "block";
+    el.textContent = msg;
+  }
+  function clearModalError(){
+    const el = document.getElementById("modalError");
+    el.style.display = "none";
+    el.textContent = "";
+  }
+
+  function openModalAdd(){
+    modalMode = "add";
+    editingId = null;
+    document.getElementById("modalTitle").textContent = "Agregar producto";
+    document.getElementById("pName").value = "";
+    document.getElementById("pUsd").value = "";
+    clearModalError();
+    updateEstimate();
+    showModal();
+  }
+
+  function openModalEdit(id){
+    const p = products.find(x => x.id === id);
+    if(!p) return;
+
+    modalMode = "edit";
+    editingId = id;
+    document.getElementById("modalTitle").textContent = "Editar producto";
+    document.getElementById("pName").value = p.name;
+    document.getElementById("pUsd").value = p.usd;
+    clearModalError();
+    updateEstimate();
+    showModal();
+  }
+
+  function updateEstimate(){
+    const usd = toNumber(document.getElementById("pUsd").value);
+    const ars = computeARS(usd);
+    document.getElementById("arsEstimate").textContent =
+      (ars == null) ? "—" : nfARS.format(ars);
+
+    const hint = usdRate ? `${formatRate(usdRate)} (${rateMeta.source})` : "—";
+    document.getElementById("rateHint").textContent = "Usando dólar: " + hint;
+  }
+
+  function saveFromModal(){
+    const name = document.getElementById("pName").value.trim();
+    const usd = toNumber(document.getElementById("pUsd").value);
+
+    if(!name){
+      setModalError("Escribí el nombre del producto.");
+      return;
+    }
+    if(usd == null || usd < 0){
+      setModalError("El precio en USD no es válido.");
+      return;
+    }
+
+    if(modalMode === "add"){
+      products.push({ id: uid(), name, usd });
+      setStatus("Producto agregado ✅");
+    }else{
+      const i = products.findIndex(p => p.id === editingId);
+      if(i >= 0){
+        products[i] = { ...products[i], name, usd };
+        setStatus("Producto editado ✅");
+      }
+    }
+
+    saveProducts();
+    render();
+    hideModal();
+  }
+
+  // ===== Actions =====
+  function deleteProduct(id){
+    const p = products.find(x => x.id === id);
+    if(!p) return;
+    if(!confirm(`¿Eliminar "${p.name}"?`)) return;
+
+    products = products.filter(x => x.id !== id);
+    saveProducts();
+    render();
+    setStatus("Producto eliminado ✅");
+  }
+
+  function clearAll(){
+    if(!confirm("¿Seguro que querés borrar TODOS los productos?")) return;
+    products = [];
+    saveProducts();
+    render();
+    setStatus("Lista vacía.");
+  }
+
+  function exportCSV(){
+    const lines = [["Producto","USD","ARS"]];
+    products.forEach(p=>{
+      const ars = computeARS(p.usd);
+      lines.push([p.name.replaceAll('"','""'), p.usd, ars == null ? "" : ars.toFixed(2)]);
+    });
+    const csv = lines.map(row => row.map(v => `"${v}"`).join(",")).join("\n");
+    const blob = new Blob([csv], {type:"text/csv;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "productos.csv";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    setStatus("CSV exportado ✅");
+  }
+
+  // ===== Dólar oficial del día =====
+  async function fetchOfficialRate(){
+    try{
+      setStatus("Actualizando dólar oficial…");
+      const res = await fetch(DOLAR_API_URL, { cache: "no-store" });
+      if(!res.ok) throw new Error("HTTP " + res.status);
+      const data = await res.json();
+
+      const venta = Number(data.venta);
+      if(!Number.isFinite(venta) || venta <= 0) throw new Error("Dato inválido");
+
+      usdRate = venta;
+      rateMeta.source = "DolarApi (Oficial)";
+      rateMeta.updated = (data.fechaActualizacion ? new Date(data.fechaActualizacion).toLocaleString("es-AR") : "—");
+      setStatus("Dólar actualizado ✅");
+      render();
+      updateEstimate();
+    }catch(err){
+      setStatus("No pude traer el dólar automático. Usá el campo manual.", true);
+      rateMeta.source = "Manual / Sin conexión";
+      rateMeta.updated = "—";
+      render();
+      updateEstimate();
+    }
+  }
+
+  function applyManualRate(){
+    const v = toNumber(document.getElementById("manualRate").value);
+    if(v == null || v <= 0){
+      setStatus("Dólar manual inválido.", true);
+      return;
+    }
+    usdRate = v;
+    rateMeta.source = "Manual";
+    rateMeta.updated = new Date().toLocaleString("es-AR");
+    setStatus("Dólar manual aplicado ✅");
+    render();
+    updateEstimate();
+  }
+
+  function initModalEvents(){
+    const overlay = document.getElementById("modalOverlay");
+    overlay.addEventListener("click", (e) => {
+      if(e.target === overlay) hideModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") hideModal();
+    });
+
+    document.getElementById("closeModal").addEventListener("click", hideModal);
+    document.getElementById("cancelModal").addEventListener("click", hideModal);
+    document.getElementById("saveModal").addEventListener("click", saveFromModal);
+
+    // Enter para guardar
+    ["pName","pUsd"].forEach(id=>{
+      document.getElementById(id).addEventListener("keydown", (e)=>{
+        if(e.key === "Enter") saveFromModal();
+      });
+    });
+
+    // Actualizar ARS estimado en tiempo real
+    document.getElementById("pUsd").addEventListener("input", updateEstimate);
+  }
+
+  // ===== Init =====
+  document.getElementById("addBtn").addEventListener("click", openModalAdd);
+  document.getElementById("clearAll").addEventListener("click", clearAll);
+  document.getElementById("exportCsv").addEventListener("click", exportCSV);
+  document.getElementById("applyManual").addEventListener("click", applyManualRate);
+
+  initModalEvents();
+  render();
+  fetchOfficialRate();
+</script>
+
+</body>
+</html>
