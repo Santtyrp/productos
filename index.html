@@ -14,198 +14,108 @@
       --danger:#c1121f;
       --overlay: rgba(15, 30, 74, 0.35);
     }
-    body{
-      margin:0;
-      font-family: Arial, sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      padding:18px;
-    }
-    .topbar{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:flex-end;
-      justify-content:space-between;
-      margin-bottom:14px;
-    }
+    body{ margin:0; font-family: Arial, sans-serif; background:var(--bg); color:var(--text); padding:18px; }
+    .topbar{ display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; margin-bottom:14px; }
     h1{ margin:0; font-size:20px; color:var(--primary); }
-    .ratebox{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      text-align:right;
-      font-size:13px;
-      color:var(--muted);
-    }
+    .ratebox{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end; text-align:right; font-size:13px; color:var(--muted); }
     .ratebox b{ color:var(--text); }
     .manual{ display:flex; gap:6px; align-items:center; }
     input[type="number"], input[type="text"]{
-      height:34px;
-      border:1px solid var(--line);
-      border-radius:6px;
-      padding:0 10px;
-      outline:none;
-      background:white;
-      color:var(--text);
+      height:34px; border:1px solid var(--line); border-radius:6px; padding:0 10px;
+      outline:none; background:white; color:var(--text);
     }
     input[type="number"]{ width:140px; }
     .btn{
-      height:34px;
-      border:1px solid var(--primary);
-      background:var(--primary);
-      color:#fff;
-      border-radius:8px;
-      padding:0 12px;
-      cursor:pointer;
-      font-weight:700;
+      height:34px; border:1px solid var(--primary); background:var(--primary); color:#fff;
+      border-radius:8px; padding:0 12px; cursor:pointer; font-weight:700;
     }
     .btn:active{ transform: translateY(1px); }
     .btn-ghost{ background:#fff; color:var(--primary); }
     .btn-danger{ border-color:var(--danger); background:var(--danger); }
 
-    table{
-      width:100%;
-      border-collapse:collapse;
-      background:white;
-      border:1px solid var(--line);
-    }
+    table{ width:100%; border-collapse:collapse; background:white; border:1px solid var(--line); }
     thead th{
-      text-align:left;
-      font-size:13px;
-      padding:10px;
-      background:#fafbfc;
-      border-bottom:1px solid var(--line);
-      color:#111827;
-      position:sticky;
-      top:0;
-      z-index:1;
+      text-align:left; font-size:13px; padding:10px; background:#fafbfc; border-bottom:1px solid var(--line);
+      color:#111827; position:sticky; top:0; z-index:1;
     }
-    tbody td{
-      padding:9px 10px;
-      border-bottom:1px solid var(--line);
-      font-size:14px;
-      vertical-align:middle;
-    }
+    tbody td{ padding:9px 10px; border-bottom:1px solid var(--line); font-size:14px; vertical-align:middle; }
     tbody tr:hover{ background:#f9fbff; }
-    .td-actions{
-      white-space:nowrap;
-      display:flex;
-      gap:8px;
-      justify-content:flex-end;
-    }
+    .td-actions{ white-space:nowrap; display:flex; gap:8px; justify-content:flex-end; }
     .mini{
-      height:30px;
-      padding:0 10px;
-      border-radius:7px;
-      font-weight:700;
-      border:1px solid var(--line);
-      background:white;
-      cursor:pointer;
+      height:30px; padding:0 10px; border-radius:7px; font-weight:700; border:1px solid var(--line);
+      background:white; cursor:pointer;
     }
     .mini.edit{ border-color:#9ca3af; }
     .mini.del{ border-color:var(--danger); color:var(--danger); }
 
     .footer{
-      margin-top:10px;
-      color:var(--muted);
-      font-size:12px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
+      margin-top:10px; color:var(--muted); font-size:12px; display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
     }
-    .left-actions{
-      display:flex; gap:8px; flex-wrap:wrap; align-items:center;
-      margin-bottom:12px;
-    }
+    .left-actions{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
     .pill{
-      display:inline-flex;
-      gap:6px;
-      align-items:center;
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:6px 10px;
-      background:#fff;
-      color:var(--muted);
-      font-size:12px;
+      display:inline-flex; gap:6px; align-items:center; border:1px solid var(--line); border-radius:999px;
+      padding:6px 10px; background:#fff; color:var(--muted); font-size:12px;
     }
     .err{ color:var(--danger); font-weight:700; }
 
     /* ===== Modal ===== */
     .modalOverlay{
-      position:fixed;
-      inset:0;
-      background:var(--overlay);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:16px;
-      z-index:999;
+      position:fixed; inset:0; background:var(--overlay); display:none; align-items:center; justify-content:center;
+      padding:16px; z-index:999;
     }
     .modal{
-      width:min(520px, 100%);
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:14px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.18);
-      overflow:hidden;
+      width:min(560px, 100%); background:#fff; border:1px solid var(--line); border-radius:14px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.18); overflow:hidden;
     }
     .modalHeader{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:14px 16px;
-      background:#fafbfc;
-      border-bottom:1px solid var(--line);
+      display:flex; align-items:center; justify-content:space-between; padding:14px 16px;
+      background:#fafbfc; border-bottom:1px solid var(--line);
     }
-    .modalHeader h2{
-      margin:0;
-      font-size:16px;
-      color:var(--primary);
-    }
+    .modalHeader h2{ margin:0; font-size:16px; color:var(--primary); }
     .closeX{
-      border:1px solid var(--line);
-      background:#fff;
-      width:34px;
-      height:34px;
-      border-radius:10px;
-      cursor:pointer;
-      font-weight:900;
-      color:#111827;
+      border:1px solid var(--line); background:#fff; width:34px; height:34px; border-radius:10px;
+      cursor:pointer; font-weight:900; color:#111827;
     }
     .modalBody{ padding:14px 16px; }
     .field{ margin-bottom:12px; }
-    .field label{
-      display:block;
-      font-size:12px;
-      color:var(--muted);
-      margin-bottom:6px;
-      font-weight:700;
-    }
-    .field input{
-      width:100%;
-      height:40px;
-      border-radius:10px;
-    }
-    .help{
-      font-size:12px;
-      color:var(--muted);
-      margin-top:6px;
-      line-height: 1.35;
-    }
+    .field label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; font-weight:700; }
+    .field input{ width:100%; height:40px; border-radius:10px; }
+    .help{ font-size:12px; color:var(--muted); margin-top:6px; line-height: 1.35; }
     .modalFooter{
-      display:flex;
-      gap:10px;
-      justify-content:flex-end;
-      padding:14px 16px;
-      border-top:1px solid var(--line);
-      background:#fff;
+      display:flex; gap:10px; justify-content:flex-end; padding:14px 16px; border-top:1px solid var(--line); background:#fff;
     }
     .btnWide{ height:40px; border-radius:10px; }
+
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 560px){
+      .row{ grid-template-columns: 1fr; }
+    }
+
+    .seg{
+      display:flex;
+      border:1px solid var(--line);
+      border-radius:12px;
+      overflow:hidden;
+      background:#fff;
+      height:40px;
+    }
+    .seg button{
+      flex:1;
+      border:0;
+      background:#fff;
+      cursor:pointer;
+      font-weight:800;
+      color:var(--muted);
+    }
+    .seg button.active{
+      background:var(--primary);
+      color:#fff;
+    }
 
     .estimateBox{
       margin-top:10px;
@@ -221,6 +131,18 @@
     }
     .estimateBox b{ color:var(--text); }
     .estimateBox .muted{ color:var(--muted); font-size:12px; }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:#374151;
+      font-size:12px;
+      font-weight:800;
+    }
   </style>
 </head>
 <body>
@@ -229,7 +151,7 @@
     <div>
       <h1>Productos (lista)</h1>
       <div style="color:var(--muted); font-size:13px; margin-top:6px;">
-        Cargás en USD y se convierte automático a ARS con el dólar oficial del día.
+        Elegís cargar en USD o ARS y se calcula la otra moneda automáticamente con el dólar oficial.
       </div>
     </div>
 
@@ -255,10 +177,11 @@
   <table aria-label="Lista de productos">
     <thead>
       <tr>
-        <th style="width:45%;">Producto</th>
+        <th style="width:40%;">Producto</th>
+        <th style="width:10%;">Moneda cargada</th>
         <th style="width:15%;">USD</th>
         <th style="width:20%;">ARS</th>
-        <th style="width:20%; text-align:right;">Acciones</th>
+        <th style="width:15%; text-align:right;">Acciones</th>
       </tr>
     </thead>
     <tbody id="tbody"></tbody>
@@ -269,35 +192,52 @@
     <div id="countInfo">0 productos</div>
   </div>
 
-  <!-- ===== Modal Agregar/Editar ===== -->
+  <!-- ===== Modal ===== -->
   <div class="modalOverlay" id="modalOverlay" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modalHeader">
         <h2 id="modalTitle">Agregar producto</h2>
         <button class="closeX" id="closeModal" title="Cerrar">✕</button>
       </div>
+
       <div class="modalBody">
         <div class="field">
           <label for="pName">Nombre del producto</label>
           <input id="pName" type="text" placeholder="Ej: Pala de pádel" autocomplete="off" />
         </div>
 
-        <div class="field">
-          <label for="pUsd">Precio (USD)</label>
-          <input id="pUsd" type="number" min="0" step="0.01" placeholder="Ej: 25.50" />
-          <div class="help">Se convierte a ARS automáticamente con el dólar oficial (venta).</div>
-
-          <div class="estimateBox">
-            <div>
-              <div class="muted">ARS estimado</div>
-              <b id="arsEstimate">—</b>
+        <div class="row">
+          <div class="field">
+            <label>Elegir moneda</label>
+            <div class="seg">
+              <button id="btnUSD" type="button" class="active">USD</button>
+              <button id="btnARS" type="button">ARS</button>
             </div>
-            <div class="muted" id="rateHint">Usando dólar: —</div>
+            <div class="help">Elegís en cuál cargar el precio.</div>
           </div>
+
+          <div class="field">
+            <label id="priceLabel" for="pPrice">Precio (USD)</label>
+            <input id="pPrice" type="number" min="0" step="0.01" placeholder="Ej: 25.50" />
+            <div class="help" id="priceHelp">Se convertirá a ARS automáticamente.</div>
+          </div>
+        </div>
+
+        <div class="estimateBox">
+          <div>
+            <div class="muted">USD</div>
+            <b id="usdPreview">—</b>
+          </div>
+          <div>
+            <div class="muted">ARS</div>
+            <b id="arsPreview">—</b>
+          </div>
+          <div class="muted" id="rateHint">Usando dólar: —</div>
         </div>
 
         <div id="modalError" class="help" style="display:none; color:var(--danger); font-weight:700;"></div>
       </div>
+
       <div class="modalFooter">
         <button class="btn btn-ghost btnWide" id="cancelModal">Cancelar</button>
         <button class="btn btnWide" id="saveModal">Guardar</button>
@@ -306,15 +246,16 @@
   </div>
 
 <script>
-  const STORAGE_KEY = "lista_productos_v1";
+  const STORAGE_KEY = "lista_productos_v3";
   const DOLAR_API_URL = "https://dolarapi.com/v1/dolares/oficial";
 
   let products = loadProducts();
-  let usdRate = null; // ARS por 1 USD (venta)
+  let usdRate = null;
   let rateMeta = { source: "—", updated: "—" };
 
-  let modalMode = "add"; // "add" | "edit"
+  let modalMode = "add";
   let editingId = null;
+  let inputCurrency = "USD";
 
   const nfARS = new Intl.NumberFormat("es-AR", { style:"currency", currency:"ARS", maximumFractionDigits: 2 });
   const nfUSD = new Intl.NumberFormat("en-US", { style:"currency", currency:"USD", maximumFractionDigits: 2 });
@@ -326,33 +267,28 @@
   }
 
   function loadProducts(){
-    try{
-      const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : [];
-    }catch(e){ return []; }
+    try{ const raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : []; }
+    catch(e){ return []; }
   }
-
-  function saveProducts(){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
-  }
-
-  function uid(){
-    return Math.random().toString(16).slice(2) + Date.now().toString(16);
-  }
-
-  function toNumber(v){
-    const n = Number(v);
-    return Number.isFinite(n) ? n : null;
-  }
+  function saveProducts(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(products)); }
+  function uid(){ return Math.random().toString(16).slice(2) + Date.now().toString(16); }
+  function toNumber(v){ const n = Number(v); return Number.isFinite(n) ? n : null; }
 
   function formatRate(v){
     if(!v) return "—";
     return nfARS.format(v).replace("ARS", "").trim() + " / USD";
   }
 
-  function computeARS(usd){
-    if(!usdRate || !Number.isFinite(usd)) return null;
-    return usd * usdRate;
+  function computeFromUSD(usd){
+    if(usd == null || usd < 0) return { usd:null, ars:null };
+    const ars = (usdRate && Number.isFinite(usd)) ? (usd * usdRate) : null;
+    return { usd, ars };
+  }
+
+  function computeFromARS(ars){
+    if(ars == null || ars < 0) return { usd:null, ars:null };
+    const usd = (usdRate && Number.isFinite(ars) && usdRate > 0) ? (ars / usdRate) : null;
+    return { usd, ars };
   }
 
   function render(){
@@ -365,12 +301,17 @@
       const tdName = document.createElement("td");
       tdName.textContent = p.name;
 
+      const tdCur = document.createElement("td");
+      const tag = document.createElement("span");
+      tag.className = "tag";
+      tag.textContent = p.inputCurrency || "—";
+      tdCur.appendChild(tag);
+
       const tdUsd = document.createElement("td");
-      tdUsd.textContent = nfUSD.format(p.usd);
+      tdUsd.textContent = (p.usd == null) ? "—" : nfUSD.format(p.usd);
 
       const tdArs = document.createElement("td");
-      const ars = computeARS(p.usd);
-      tdArs.textContent = (ars == null) ? "—" : nfARS.format(ars);
+      tdArs.textContent = (p.ars == null) ? "—" : nfARS.format(p.ars);
 
       const tdActions = document.createElement("td");
       tdActions.className = "td-actions";
@@ -389,6 +330,7 @@
       tdActions.appendChild(btnDel);
 
       tr.appendChild(tdName);
+      tr.appendChild(tdCur);
       tr.appendChild(tdUsd);
       tr.appendChild(tdArs);
       tr.appendChild(tdActions);
@@ -409,17 +351,16 @@
     const ov = document.getElementById("modalOverlay");
     ov.style.display = "flex";
     ov.setAttribute("aria-hidden", "false");
-    updateEstimate();
+    updateModalUI();
+    updatePreview();
     setTimeout(() => document.getElementById("pName").focus(), 0);
   }
-
   function hideModal(){
     const ov = document.getElementById("modalOverlay");
     ov.style.display = "none";
     ov.setAttribute("aria-hidden", "true");
     clearModalError();
   }
-
   function setModalError(msg){
     const el = document.getElementById("modalError");
     el.style.display = "block";
@@ -431,14 +372,53 @@
     el.textContent = "";
   }
 
+  function setCurrency(cur){
+    inputCurrency = cur;
+    document.getElementById("btnUSD").classList.toggle("active", cur === "USD");
+    document.getElementById("btnARS").classList.toggle("active", cur === "ARS");
+    updateModalUI();
+    updatePreview();
+    document.getElementById("pPrice").focus();
+  }
+
+  function updateModalUI(){
+    const label = document.getElementById("priceLabel");
+    const help = document.getElementById("priceHelp");
+    if(inputCurrency === "USD"){
+      label.textContent = "Precio (USD)";
+      help.textContent = "Se convertirá a ARS automáticamente.";
+      document.getElementById("pPrice").placeholder = "Ej: 25.50";
+    }else{
+      label.textContent = "Precio (ARS)";
+      help.textContent = "Se convertirá a USD automáticamente.";
+      document.getElementById("pPrice").placeholder = "Ej: 35000";
+    }
+    const hint = usdRate ? `${formatRate(usdRate)} (${rateMeta.source})` : "—";
+    document.getElementById("rateHint").textContent = "Usando dólar: " + hint;
+  }
+
+  function updatePreview(){
+    const val = toNumber(document.getElementById("pPrice").value);
+    let usd = null, ars = null;
+
+    if(inputCurrency === "USD"){
+      ({usd, ars} = computeFromUSD(val));
+    }else{
+      ({usd, ars} = computeFromARS(val));
+    }
+
+    document.getElementById("usdPreview").textContent = (usd == null) ? "—" : nfUSD.format(usd);
+    document.getElementById("arsPreview").textContent = (ars == null) ? "—" : nfARS.format(ars);
+  }
+
   function openModalAdd(){
     modalMode = "add";
     editingId = null;
     document.getElementById("modalTitle").textContent = "Agregar producto";
     document.getElementById("pName").value = "";
-    document.getElementById("pUsd").value = "";
+    document.getElementById("pPrice").value = "";
+    setCurrency("USD");
     clearModalError();
-    updateEstimate();
     showModal();
   }
 
@@ -450,42 +430,37 @@
     editingId = id;
     document.getElementById("modalTitle").textContent = "Editar producto";
     document.getElementById("pName").value = p.name;
-    document.getElementById("pUsd").value = p.usd;
+
+    setCurrency(p.inputCurrency || "USD");
+    document.getElementById("pPrice").value = (p.inputCurrency === "ARS") ? (p.ars ?? "") : (p.usd ?? "");
+
     clearModalError();
-    updateEstimate();
     showModal();
-  }
-
-  function updateEstimate(){
-    const usd = toNumber(document.getElementById("pUsd").value);
-    const ars = computeARS(usd);
-    document.getElementById("arsEstimate").textContent =
-      (ars == null) ? "—" : nfARS.format(ars);
-
-    const hint = usdRate ? `${formatRate(usdRate)} (${rateMeta.source})` : "—";
-    document.getElementById("rateHint").textContent = "Usando dólar: " + hint;
   }
 
   function saveFromModal(){
     const name = document.getElementById("pName").value.trim();
-    const usd = toNumber(document.getElementById("pUsd").value);
+    const price = toNumber(document.getElementById("pPrice").value);
 
-    if(!name){
-      setModalError("Escribí el nombre del producto.");
-      return;
+    if(!name){ setModalError("Escribí el nombre del producto."); return; }
+    if(price == null || price < 0){ setModalError("El precio no es válido."); return; }
+
+    let usd = null, ars = null;
+    if(inputCurrency === "USD"){
+      ({usd, ars} = computeFromUSD(price));
+    }else{
+      ({usd, ars} = computeFromARS(price));
     }
-    if(usd == null || usd < 0){
-      setModalError("El precio en USD no es válido.");
-      return;
-    }
+
+    const payload = { name, usd, ars, inputCurrency };
 
     if(modalMode === "add"){
-      products.push({ id: uid(), name, usd });
+      products.push({ id: uid(), ...payload });
       setStatus("Producto agregado ✅");
     }else{
-      const i = products.findIndex(p => p.id === editingId);
+      const i = products.findIndex(x => x.id === editingId);
       if(i >= 0){
-        products[i] = { ...products[i], name, usd };
+        products[i] = { ...products[i], ...payload };
         setStatus("Producto editado ✅");
       }
     }
@@ -495,7 +470,6 @@
     hideModal();
   }
 
-  // ===== Actions =====
   function deleteProduct(id){
     const p = products.find(x => x.id === id);
     if(!p) return;
@@ -516,10 +490,14 @@
   }
 
   function exportCSV(){
-    const lines = [["Producto","USD","ARS"]];
+    const lines = [["Producto","Moneda cargada","USD","ARS"]];
     products.forEach(p=>{
-      const ars = computeARS(p.usd);
-      lines.push([p.name.replaceAll('"','""'), p.usd, ars == null ? "" : ars.toFixed(2)]);
+      lines.push([
+        p.name.replaceAll('"','""'),
+        (p.inputCurrency || ""),
+        (p.usd == null ? "" : p.usd.toFixed(2)),
+        (p.ars == null ? "" : p.ars.toFixed(2))
+      ]);
     });
     const csv = lines.map(row => row.map(v => `"${v}"`).join(",")).join("\n");
     const blob = new Blob([csv], {type:"text/csv;charset=utf-8"});
@@ -534,7 +512,6 @@
     setStatus("CSV exportado ✅");
   }
 
-  // ===== Dólar oficial del día =====
   async function fetchOfficialRate(){
     try{
       setStatus("Actualizando dólar oficial…");
@@ -548,61 +525,83 @@
       usdRate = venta;
       rateMeta.source = "DolarApi (Oficial)";
       rateMeta.updated = (data.fechaActualizacion ? new Date(data.fechaActualizacion).toLocaleString("es-AR") : "—");
+
+      // recalcular al dólar del día
+      products = products.map(p => {
+        if(p.inputCurrency === "ARS"){
+          const usd = (p.ars != null && usdRate) ? (p.ars / usdRate) : null;
+          return { ...p, usd };
+        }else{
+          const ars = (p.usd != null && usdRate) ? (p.usd * usdRate) : null;
+          return { ...p, ars };
+        }
+      });
+
+      saveProducts();
       setStatus("Dólar actualizado ✅");
       render();
-      updateEstimate();
+      updateModalUI();
+      updatePreview();
     }catch(err){
       setStatus("No pude traer el dólar automático. Usá el campo manual.", true);
       rateMeta.source = "Manual / Sin conexión";
       rateMeta.updated = "—";
       render();
-      updateEstimate();
+      updateModalUI();
+      updatePreview();
     }
   }
 
   function applyManualRate(){
     const v = toNumber(document.getElementById("manualRate").value);
-    if(v == null || v <= 0){
-      setStatus("Dólar manual inválido.", true);
-      return;
-    }
+    if(v == null || v <= 0){ setStatus("Dólar manual inválido.", true); return; }
     usdRate = v;
     rateMeta.source = "Manual";
     rateMeta.updated = new Date().toLocaleString("es-AR");
+
+    products = products.map(p => {
+      if(p.inputCurrency === "ARS"){
+        const usd = (p.ars != null && usdRate) ? (p.ars / usdRate) : null;
+        return { ...p, usd };
+      }else{
+        const ars = (p.usd != null && usdRate) ? (p.usd * usdRate) : null;
+        return { ...p, ars };
+      }
+    });
+
+    saveProducts();
     setStatus("Dólar manual aplicado ✅");
     render();
-    updateEstimate();
+    updateModalUI();
+    updatePreview();
   }
 
   function initModalEvents(){
     const overlay = document.getElementById("modalOverlay");
-    overlay.addEventListener("click", (e) => {
-      if(e.target === overlay) hideModal();
-    });
-    document.addEventListener("keydown", (e) => {
-      if(e.key === "Escape") hideModal();
-    });
+    overlay.addEventListener("click", (e) => { if(e.target === overlay) hideModal(); });
+    document.addEventListener("keydown", (e) => { if(e.key === "Escape") hideModal(); });
 
     document.getElementById("closeModal").addEventListener("click", hideModal);
     document.getElementById("cancelModal").addEventListener("click", hideModal);
     document.getElementById("saveModal").addEventListener("click", saveFromModal);
 
-    // Enter para guardar
-    ["pName","pUsd"].forEach(id=>{
+    document.getElementById("btnUSD").addEventListener("click", () => setCurrency("USD"));
+    document.getElementById("btnARS").addEventListener("click", () => setCurrency("ARS"));
+
+    document.getElementById("pPrice").addEventListener("input", updatePreview);
+
+    ["pName","pPrice"].forEach(id=>{
       document.getElementById(id).addEventListener("keydown", (e)=>{
         if(e.key === "Enter") saveFromModal();
       });
     });
 
-    // Actualizar ARS estimado en tiempo real
-    document.getElementById("pUsd").addEventListener("input", updateEstimate);
+    document.getElementById("applyManual").addEventListener("click", applyManualRate);
   }
 
-  // ===== Init =====
   document.getElementById("addBtn").addEventListener("click", openModalAdd);
   document.getElementById("clearAll").addEventListener("click", clearAll);
   document.getElementById("exportCsv").addEventListener("click", exportCSV);
-  document.getElementById("applyManual").addEventListener("click", applyManualRate);
 
   initModalEvents();
   render();
